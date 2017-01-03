@@ -1,6 +1,10 @@
 # Roadmap for KeeperHelper
 
-## Quest / variation selection
+## Quest / variation selection	
+	- For each quest, ask the history questions to the keeper
+	- For each question, add history marker
+	- From the quest & the history markers, spread the items in the different rooms
+	- Randomly spread the last undistributed items in the rooms which doesn't have any cards
 
 ## Get objects (including proper clue cards) per room for each quests
 	- Add icon if obstacle / lock
@@ -42,5 +46,10 @@
 ## History & Journal
 
 ## Auto save feature
+
+## Add extensions
+	- Select extension packs owned
+	- Add corresponding cards to pool
+	- Add new mechanisms
 
 ## Add FAQ section
