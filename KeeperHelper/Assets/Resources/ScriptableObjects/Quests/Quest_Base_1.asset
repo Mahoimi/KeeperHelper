@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d635f0cf6821f4f892c69f5f2f0ba2, type: 3}
+  m_Name: Quest_Base_1
+  m_EditorClassIdentifier: 
+  NameLocId: Quest_Base_1
+  GameExtension: 0
+  QuestNumber: 1
+  Rooms: []
+  Questions:
+  - QuestionLocId: QHQ_Base_1_1
+    Answers:
+    - AnswerLocId: QHA_Base_1_1_A
+      HistoryMarker: 0
+    - AnswerLocId: QHA_Base_1_1_B
+      HistoryMarker: 1
+    - AnswerLocId: QHA_Base_1_1_C
+      HistoryMarker: 2
+  - QuestionLocId: QHA_Base_1_2
+    Answers:
+    - AnswerLocId: QHA_Base_1_2_A
+      HistoryMarker: 3
+    - AnswerLocId: QHA_Base_1_2_B
+      HistoryMarker: 4
+  - QuestionLocId: QHA_Base_1_3
+    Answers:
+    - AnswerLocId: QHA_Base_1_3_A
+      HistoryMarker: 5
+    - AnswerLocId: QHA_Base_1_3_B
+      HistoryMarker: 6

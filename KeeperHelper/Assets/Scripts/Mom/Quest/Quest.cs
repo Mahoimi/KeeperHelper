@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace KeeperHelper
 {
-    public enum MomExtension
+    public enum GameExtension
     {
         Base,
-        Forest,
-        Experiences,
+        ForbiddenAlchemy,
+        CallOfTheWild,
 
         Count
     }
@@ -17,7 +17,8 @@ namespace KeeperHelper
     public class Quest : ScriptableObject
     {
         public string NameLocId = GlobalVariables.UnknownLocId;
-        public MomExtension MomExension = MomExtension.Base;
+        public GameExtension GameExtension = GameExtension.Base;
+        public uint QuestNumber = 0;
         public RoomDescription[] Rooms = null;
         public QuestHistoryQuestion[] Questions = null;
     }
