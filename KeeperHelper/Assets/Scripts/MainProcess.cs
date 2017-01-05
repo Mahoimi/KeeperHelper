@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.Assertions;
 using UnityEngine;
-using Utils;
+using KeeperHelper.Utils;
 
 namespace KeeperHelper
 {
@@ -26,6 +26,7 @@ namespace KeeperHelper
         private void SetupProject()
         {
             Assert.raiseExceptions = true;
+            LogHandler.RegisterLogHandler();
         }
     }
 }
