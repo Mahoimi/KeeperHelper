@@ -16,7 +16,7 @@ namespace KeeperHelper
         [MenuItem(c_menuPath)]
         private static void AssignQuestions()
         {
-            string[][] data = CSVReader.Read(c_questHistoryQuestionCSV);
+            string[][] data = CSVReader.Read(c_questHistoryQuestionCSV,';');
 
             for (int i = 0; i < data.Length; i++)
             {

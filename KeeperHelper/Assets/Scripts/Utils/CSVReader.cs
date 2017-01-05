@@ -5,7 +5,7 @@ namespace KeeperHelper.Utils
 {
     public static class CSVReader
     {
-        public static string[][] Read(string resourcePath)
+        public static string[][] Read(string resourcePath, params char[] delimiters)
         {
             TextAsset csvData = Resources.Load<TextAsset>(resourcePath);
             Assert.IsNotNull(csvData);
@@ -16,7 +16,7 @@ namespace KeeperHelper.Utils
 
             for (int i = 0; i < lines.Length; i++)
             {
-                string[] column = lines[i].Split(';');
+                string[] column = lines[i].Split(delimiters);
                 data[i] = column;
             }
 
