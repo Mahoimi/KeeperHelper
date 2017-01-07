@@ -15,4 +15,24 @@ MonoBehaviour:
   GameExtension: 0
   QuestNumber: 1
   Rooms: []
-  Questions: []
+  Questions:
+  - QuestionLocId: QHQ_Base_1_1
+    Answers:
+    - AnswerLocId: QHA_Base_1_1_A
+      HistoryMarker: 0
+    - AnswerLocId: QHA_Base_1_1_B
+      HistoryMarker: 1
+    - AnswerLocId: QHA_Base_1_1_C
+      HistoryMarker: 2
+  - QuestionLocId: QHQ_Base_1_2
+    Answers:
+    - AnswerLocId: QHA_Base_1_2_A
+      HistoryMarker: 3
+    - AnswerLocId: QHA_Base_1_2_B
+      HistoryMarker: 4
+  - QuestionLocId: QHQ_Base_1_3
+    Answers:
+    - AnswerLocId: QHA_Base_1_3_A
+      HistoryMarker: 5
+    - AnswerLocId: QHA_Base_1_3_B
+      HistoryMarker: 6
