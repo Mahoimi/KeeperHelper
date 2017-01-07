@@ -11,6 +11,8 @@ namespace KeeperHelper
         [SerializeField]
         private GameObject m_questSelectionContent = null;
 
+        private QuestSelectionContent[] m_questSelectionContents = null;
+
         #region Init
         public void ManualAwake()
         {
@@ -25,6 +27,8 @@ namespace KeeperHelper
             // Load all quests
             Quest[] quests = Quest.GetAllQuests();
 
+            m_questSelectionContents = new QuestSelectionContent[quests.Length];
+
             for (int i = 0; i < quests.Length; i++)
             {
                 // Instantiate content
@@ -35,6 +39,7 @@ namespace KeeperHelper
                 QuestSelectionContent content = go.GetComponent<QuestSelectionContent>();
                 Assert.IsNotNull(content);
                 content.Initialize(quests[i]);
+                m_questSelectionContents[i] = content;
             }
         }
         #endregion

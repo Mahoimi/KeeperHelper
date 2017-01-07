@@ -17,10 +17,15 @@ namespace KeeperHelper
 
         [SerializeField]
         private QuestSelectionUI m_questSelectionUI = null;
+
+        [SerializeField]
+        private VariantSelectionUI m_variantSelectionUI = null;
         #endregion
 
         #region HistoryCallbacks
         private HistoryCallback m_newGameButtonHistoryCallback = null;
+        private HistoryCallback m_questSelectedHistoryCallback = null;
+        private HistoryCallback m_historyAnswerHistoryCallback = null;
         #endregion
         #endregion
 
@@ -32,14 +37,18 @@ namespace KeeperHelper
             Assert.IsNotNull(m_backButtonUI);
             Assert.IsNotNull(m_mainMenuUI);
             Assert.IsNotNull(m_questSelectionUI);
+            Assert.IsNotNull(m_variantSelectionUI);
 
             // Assign HistoryCallbacks
             m_newGameButtonHistoryCallback = NewGameButtonHistoryCallback;
+            m_questSelectedHistoryCallback = QuestSelectedHistoryCallback;
+            m_historyAnswerHistoryCallback = HistoryAnswerHistoryCallback;
 
             // Call ManualAwakes
             m_backButtonUI.ManualAwake();
             m_mainMenuUI.ManualAwake();
             m_questSelectionUI.ManualAwake();
+            m_variantSelectionUI.ManualAwake();
         }
         #endregion
 
@@ -51,6 +60,26 @@ namespace KeeperHelper
 
             MainProcess.History.HistoryPush(m_newGameButtonHistoryCallback);
         }
+
+        public void OnQuestSelected(Quest quest)
+        {
+            m_questSelectionUI.HideMenu();
+            m_variantSelectionUI.ShowMenu();
+            m_variantSelectionUI.SetQuest(quest);
+            m_variantSelectionUI.SetQuestHistoryQuestion(0);
+
+            MainProcess.History.HistoryPush(m_questSelectedHistoryCallback);
+        }
+
+        public void OnHistoryAnswerClick()
+        {
+            MainProcess.History.HistoryPush(m_historyAnswerHistoryCallback);
+        }
+
+        public void OnFinalQuestionAnswered()
+        {
+
+        }
         #endregion
 
         #region HistoryCallbacks
@@ -58,6 +87,17 @@ namespace KeeperHelper
         {
             m_questSelectionUI.HideMenu();
             m_mainMenuUI.ShowMenu();
+        }
+
+        private void QuestSelectedHistoryCallback()
+        {
+            m_variantSelectionUI.HideMenu();
+            m_questSelectionUI.ShowMenu();
+        }
+
+        private void HistoryAnswerHistoryCallback()
+        {
+            m_variantSelectionUI.SetQuestHistoryQuestion(m_variantSelectionUI.CurrentQuestionNumber-1);
         }
         #endregion
         #endregion
