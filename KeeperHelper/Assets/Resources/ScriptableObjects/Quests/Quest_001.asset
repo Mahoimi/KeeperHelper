@@ -9,30 +9,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4d635f0cf6821f4f892c69f5f2f0ba2, type: 3}
-  m_Name: Quest_Base_1
+  m_Name: Quest_001
   m_EditorClassIdentifier: 
-  NameLocId: Quest_Base_1
+  NameLocId: Quest_001
   GameExtension: 0
   QuestNumber: 1
   Rooms: []
   Questions:
-  - QuestionLocId: QHQ_Base_1_1
+  - QuestionLocId: QHQ_001_1
     Answers:
-    - AnswerLocId: QHA_Base_1_1_A
+    - AnswerLocId: QHA_001_1_A
       HistoryMarker: 0
-    - AnswerLocId: QHA_Base_1_1_B
+    - AnswerLocId: QHA_001_1_B
       HistoryMarker: 1
-    - AnswerLocId: QHA_Base_1_1_C
+    - AnswerLocId: QHA_001_1_C
       HistoryMarker: 2
-  - QuestionLocId: QHQ_Base_1_2
+  - QuestionLocId: QHQ_001_2
     Answers:
-    - AnswerLocId: QHA_Base_1_2_A
+    - AnswerLocId: QHA_001_2_A
       HistoryMarker: 3
-    - AnswerLocId: QHA_Base_1_2_B
+    - AnswerLocId: QHA_001_2_B
       HistoryMarker: 4
-  - QuestionLocId: QHQ_Base_1_3
+  - QuestionLocId: QHQ_001_3
     Answers:
-    - AnswerLocId: QHA_Base_1_3_A
+    - AnswerLocId: QHA_001_3_A
       HistoryMarker: 5
-    - AnswerLocId: QHA_Base_1_3_B
+    - AnswerLocId: QHA_001_3_B
       HistoryMarker: 6
