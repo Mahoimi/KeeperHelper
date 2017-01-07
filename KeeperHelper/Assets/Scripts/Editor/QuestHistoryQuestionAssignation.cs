@@ -18,14 +18,23 @@ namespace KeeperHelper
         {
             string[][] data = CSVReader.Read(c_questHistoryQuestionCSV,';');
 
+            Quest[] quests = Quest.GetAllQuests();
+
             for (int i = 0; i < data.Length; i++)
             {
                 string[] column = data[i];
                 string questId = column[0];
 
                 // Get quest
-                Quest quest = Resources.Load<Quest>(GlobalVariables.QuestAssetPath + questId);
-
+                Quest quest = null;
+                for (int j = 0; j < quests.Length; j++)
+                {
+                    if(quests[j].NameLocId == questId)
+                    {
+                        quest = quests[j];
+                        break;
+                    }
+                }
                 if (quest == null)
                     continue;
 

@@ -12,7 +12,13 @@ namespace KeeperHelper
         #endregion
 
         #region Paths
-        public const string QuestAssetPath = "ScriptableObjects/Quests/";
+        public const string ScriptableObjectsRoot = "ScriptableObjects";
+        public static Dictionary<GameExtension, string> ScriptableObjectsPath = new Dictionary<GameExtension, string>(){
+            { GameExtension.Base,               ScriptableObjectsRoot + "/00_Base" },
+            { GameExtension.ForbiddenAlchemy,   ScriptableObjectsRoot + "/01_ForbiddenAlchemy" },
+            { GameExtension.CallOfTheWild,      ScriptableObjectsRoot + "/02_CallOfTheWild" },
+            { GameExtension.Custom,             ScriptableObjectsRoot + "/03_Custom" },
+        };
         #endregion
     }
 }

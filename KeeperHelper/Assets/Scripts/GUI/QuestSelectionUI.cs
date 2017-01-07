@@ -25,8 +25,7 @@ namespace KeeperHelper
             Assert.IsNotNull(m_questSelectionContent);
 
             // Load all quests
-            Quest[] quests = Resources.LoadAll<Quest>(GlobalVariables.QuestAssetPath);
-            Assert.IsTrue(quests.Length > 0, string.Format("No quests found at location {0}", GlobalVariables.QuestAssetPath));
+            Quest[] quests = Quest.GetAllQuests();
 
             for (int i = 0; i < quests.Length; i++)
             {

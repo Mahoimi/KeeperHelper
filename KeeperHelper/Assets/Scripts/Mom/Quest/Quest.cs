@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace KeeperHelper
 {
@@ -9,6 +10,7 @@ namespace KeeperHelper
         Base,
         ForbiddenAlchemy,
         CallOfTheWild,
+        Custom,
 
         Count
     }
@@ -21,5 +23,12 @@ namespace KeeperHelper
         public uint QuestNumber = 0;
         public RoomDescription[] Rooms = null;
         public QuestHistoryQuestion[] Questions = null;
+
+        public static Quest[] GetAllQuests()
+        {
+            Quest[] quests = Resources.LoadAll<Quest>(GlobalVariables.ScriptableObjectsRoot);
+            Assert.IsTrue(quests.Length > 0, string.Format("No quests found at location {0}", GlobalVariables.ScriptableObjectsPath));
+            return quests;
+        }
     }
 }
