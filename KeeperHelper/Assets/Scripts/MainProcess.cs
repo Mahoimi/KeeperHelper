@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Assertions;
-using UnityEngine;
+﻿using UnityEngine.Assertions;
 using KeeperHelper.Utils;
 
 namespace KeeperHelper
 {
     public class MainProcess : SingletonMonoBehaviour<MainProcess>
     {
+        #region Static
+        public static HistoryJournal History = new HistoryJournal();
+        #endregion
+
         public UIManager UIManager = null;
 
         #region Monobehaviour
@@ -16,9 +17,11 @@ namespace KeeperHelper
             base.Awake();
 
             SetupProject();
+            
+            // Check missing refs
+            Assert.IsNotNull(UIManager);
 
             // Call ManualAwake functions
-            Assert.IsNotNull(UIManager);
             UIManager.ManualAwake();
         }
         #endregion

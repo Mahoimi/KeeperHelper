@@ -1,23 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace KeeperHelper
 {
     public class MainMenuUI : MonoBehaviour
     {
-        // Use this for initialization
+        #region Init
         public void ManualAwake()
         {
             ShowMenu();
         }
+        #endregion
 
-        private void ShowMenu()
+        public void ShowMenu()
         {
             gameObject.SetActive(true);
         }
 
-        private void HideMenu()
+        public void HideMenu()
         {
             gameObject.SetActive(false);
         }

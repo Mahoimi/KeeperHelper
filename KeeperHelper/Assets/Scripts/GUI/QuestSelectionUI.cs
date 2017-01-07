@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace KeeperHelper
@@ -14,6 +11,7 @@ namespace KeeperHelper
         [SerializeField]
         private GameObject m_questSelectionContent = null;
 
+        #region Init
         public void ManualAwake()
         {
             CreateUI();
@@ -38,6 +36,17 @@ namespace KeeperHelper
                 Assert.IsNotNull(content);
                 content.Initialize(quests[i]);
             }
+        }
+        #endregion
+
+        public void ShowMenu()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public void HideMenu()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

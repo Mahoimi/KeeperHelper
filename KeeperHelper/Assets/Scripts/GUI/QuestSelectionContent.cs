@@ -15,7 +15,7 @@ namespace KeeperHelper
         public void Initialize(Quest quest)
         {
             m_quest = quest;
-            m_textValue.text = quest.NameLocId;
+            m_textValue.text = m_quest.NameLocId;
         }
     }
 }
