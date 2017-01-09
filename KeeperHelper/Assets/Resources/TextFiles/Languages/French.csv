@@ -1,1 +1,16 @@
-Quest_001;Qu�te 1;
+﻿NewGame;Nouveau;
+LoadGame;Ouvrir;
+SwitchLanguage;Change Langue;
+QuestSelection;Selection de la Quête;
+VariantSelection; Selection d'une variante;
+Quest_001;Quête 1;
+QHQ_001_1;Quête1-Question1;
+QHA_001_1_A;Réponse1A;
+QHA_001_1_B;Réponse1B;
+QHA_001_1_C;Réponse1C;
+QHQ_001_2;Quête1-Question2;
+QHA_001_2_A;Réponse2A;
+QHA_001_2_B;Réponse2B;
+QHQ_001_3;Quête1-Question3;
+QHA_001_3_A;Réponse3A;
+QHA_001_3_B;Réponse3B;

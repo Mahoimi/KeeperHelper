@@ -16,6 +16,7 @@ namespace KeeperHelper.Utils
 
         public List<SystemLanguage> m_supportedLanguages = new List<SystemLanguage>();
         public SystemLanguage m_currentLanguage = c_defaultLanguage;
+        public Dictionary<string, string> m_localizedString = new Dictionary<string, string>();
         #endregion
 
         #region Initialization
@@ -78,7 +79,7 @@ namespace KeeperHelper.Utils
 
         #endregion
 
-        #region Current Language
+        #region Language selection
         public void GetSystemLanguage()
         { 
             SystemLanguage l_language = Application.systemLanguage;
@@ -90,11 +91,57 @@ namespace KeeperHelper.Utils
             Debug.Log("[Localization] System : " + Application.systemLanguage + " | App : " + m_currentLanguage);
         }
 
+        public void SwitchLanguage()
+        {
+            int index = m_supportedLanguages.FindIndex(x => x == m_currentLanguage);
+            int nextIndex = (index == m_supportedLanguages.Count - 1) ? 0 : (index + 1);
+            m_currentLanguage = m_supportedLanguages[nextIndex];
+            LoadCurrentLanguage();
+            RefreshLocalizedTexts();
+        }
+
+        #endregion
+
+        #region Language loading
         public void LoadCurrentLanguage()
         {
+            m_localizedString.Clear();
+
+            // Read current language csv
             string l_LanguagePath = Path.Combine(c_languagesFolderPath, "" + m_currentLanguage);
             string[][] data = CSVReader.Read(l_LanguagePath, ';');
             Debug.Log("[Localization] Load " + l_LanguagePath);
+
+            // Add csv lines (key, value) to the dictionnary
+            for (int i = 0; i < data.Length; i++)
+            {
+                // Get line columns (key, value)     
+                string[] columns = data[i];
+                if (columns.Length < 1)
+                    break;
+
+                // Replace character literals in value string
+                string l_value = CSVReader.ReplaceCharacterLiterals(columns[1]);
+
+                // Add (key, value) 
+                m_localizedString.Add(columns[0], l_value);
+                Debug.Log("[Localization] Add |" + columns[0] + "|" + l_value + "|");
+            }
+        }
+
+        public string GetLocalizedString(string key)
+        {
+            string value = "";
+            if (m_localizedString.TryGetValue(key, out value))
+                return value;
+            return key;
+        }
+
+        public void RefreshLocalizedTexts()
+        {
+            LocalizedText[] l_Texts = UnityEngine.Object.FindObjectsOfType(typeof(LocalizedText)) as LocalizedText[];
+            foreach (LocalizedText text in l_Texts)
+                text.Refresh();
         }
 
         #endregion

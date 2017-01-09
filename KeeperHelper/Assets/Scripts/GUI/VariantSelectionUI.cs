@@ -2,16 +2,17 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
+using KeeperHelper.Utils;
 
 namespace KeeperHelper
 {
 	public class VariantSelectionUI : MonoBehaviour 
 	{
         [SerializeField]
-        private Text m_questionText = null;
+        private LocalizedText m_questionText = null;
 
         [SerializeField]
-        private Text[] m_answerTexts = null;
+        private LocalizedText[] m_answerTexts = null;
 
         private Quest m_quest = null;
 
@@ -38,10 +39,14 @@ namespace KeeperHelper
 
             QuestHistoryQuestion question = m_quest.Questions[m_currentQuestionNumber];
 
-            m_questionText.text = question.QuestionLocId;
-            for (int i = 0; i < question.Answers.Length; i++)
+            m_questionText.UpdateKey(question.QuestionLocId);
+    
+            for (int i = 0; i < m_answerTexts.Length ; i++)
             {
-                m_answerTexts[i].text = question.Answers[i].AnswerLocId;
+                bool isActive = (i < question.Answers.Length);
+                m_answerTexts[i].transform.parent.gameObject.SetActive(isActive);
+                if(isActive)
+                    m_answerTexts[i].UpdateKey(question.Answers[i].AnswerLocId);
             }
         }
 

@@ -13,6 +13,9 @@ namespace KeeperHelper
         private BackButtonUI m_backButtonUI = null;
 
         [SerializeField]
+        private OptionsUI m_optionUI = null;
+
+        [SerializeField]
         private MainMenuUI m_mainMenuUI = null;
 
         [SerializeField]
@@ -35,6 +38,7 @@ namespace KeeperHelper
         {
             // Check missing refs
             Assert.IsNotNull(m_backButtonUI);
+            Assert.IsNotNull(m_optionUI);
             Assert.IsNotNull(m_mainMenuUI);
             Assert.IsNotNull(m_questSelectionUI);
             Assert.IsNotNull(m_variantSelectionUI);
@@ -46,6 +50,7 @@ namespace KeeperHelper
 
             // Call ManualAwakes
             m_backButtonUI.ManualAwake();
+            m_optionUI.ManualAwake();
             m_mainMenuUI.ManualAwake();
             m_questSelectionUI.ManualAwake();
             m_variantSelectionUI.ManualAwake();

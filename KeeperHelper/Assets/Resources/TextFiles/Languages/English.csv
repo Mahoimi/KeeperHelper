@@ -1,1 +1,16 @@
+﻿NewGame;New game;
+LoadGame;Load game;
+SwitchLanguage;Switch Language;
+QuestSelection;Quest Selection;
+VariantSelection; Variant Selection;
 Quest_001;Quest 1;
+QHQ_001_1;Qest1-Question1;
+QHA_001_1_A;Answer1A;
+QHA_001_1_B;Answer1B;
+QHA_001_1_C;Answer1C;
+QHQ_001_2;Quest1-Question2;
+QHA_001_2_A;Answer2A;
+QHA_001_2_B;Answer2B;
+QHQ_001_3;Quest1-Question3;
+QHA_001_3_A;Answer3A;
+QHA_001_3_B;Answer3B;

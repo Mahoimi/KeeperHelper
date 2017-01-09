@@ -22,5 +22,13 @@ namespace KeeperHelper.Utils
 
             return data;
         }
+
+        public static string ReplaceCharacterLiterals(string l_value)
+        {
+            string l_stringToFind = "\\n";
+
+            string l_newValue = l_value.Replace(l_stringToFind, "\n");
+            return l_newValue;
+        }
     }
 }
