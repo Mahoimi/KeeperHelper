@@ -7,6 +7,7 @@ namespace KeeperHelper
     {
         #region Static
         public static HistoryJournal History = new HistoryJournal();
+        public static LocalizationProcess Localization = new LocalizationProcess();
         #endregion
 
         public UIManager UIManager = null;
@@ -22,6 +23,7 @@ namespace KeeperHelper
             Assert.IsNotNull(UIManager);
 
             // Call ManualAwake functions
+            Localization.Initialization();
             UIManager.ManualAwake();
         }
         #endregion
