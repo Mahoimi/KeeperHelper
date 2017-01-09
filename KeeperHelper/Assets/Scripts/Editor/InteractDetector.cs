@@ -6,20 +6,28 @@ using System.Text;
 
 namespace KeeperHelper.Utils
 {
-	public class InteractDetector : EditorWindow
+    public class InteractDetector : EditorWindow
     {
+        #region Variables   
         private const string c_MenuPath = "Tools/Interact Detector";
+        private static StringBuilder s_stringBuilder = new StringBuilder();
 
+        #region UI Elements & States
         private static Dictionary<string, List<string>> s_interactableButtonHierarchies = new Dictionary<string, List<string>>();
         private static List<bool> s_foldouts = new List<bool>();
         private static Dictionary<string, bool> s_toggles = new Dictionary<string, bool>();
-        private static StringBuilder s_stringBuilder = new StringBuilder();
-        
+        #endregion
+
+        #region Editor UI Style
         private static GUIStyle s_ToogleStyle = new GUIStyle();
         private static GUIStyle s_LabelStyle = new GUIStyle();
         private static GUIStyle s_SelectedLabelStyle = new GUIStyle();
         private static Texture2D s_SelectedItemBackground;
+        #endregion
+        #endregion
 
+
+        #region Functions 
         #region MenuItem
         [MenuItem(c_MenuPath)]
         public static void CreateWindow()
@@ -29,19 +37,19 @@ namespace KeeperHelper.Utils
         }
         #endregion
 
+        #region Initialisation
         public void OnEnable()
         {
-            // TODO : Adapt GUIStyle colors according to free / pro unity skin EditorGUIUtility.isProSkin
-
+            // Adapt GUIStyle colors according to free / pro unity skin EditorGUIUtility.isProSkin
             // Toggle LabelStyles
-            s_LabelStyle.normal.textColor = EditorGUIUtility.isProSkin ? new Color(0.6f, 0.6f, 0.6f) : Color.black;
-            s_SelectedLabelStyle.normal.textColor = EditorGUIUtility.isProSkin ? Color.white : Color.white;
+            s_LabelStyle.normal.textColor = EditorGUIUtility.isProSkin ? new Color(0.65f, 0.65f, 0.65f) : Color.black;
+            s_SelectedLabelStyle.normal.textColor = Color.white;
 
             // ToggleStyle
-            Color l_LightGrey = EditorGUIUtility.isProSkin? new Color(0.6f, 0.6f, 0.6f) : new Color(0.6f, 0.6f, 0.6f);
+            Color l_SelectionColor = EditorGUIUtility.isProSkin ? new Color(0.3f, 0.3f, 0.3f) : new Color(0.6f, 0.6f, 0.6f);
             s_SelectedItemBackground = new Texture2D(1, 1);
             s_SelectedItemBackground.hideFlags = HideFlags.DontSave;
-            s_SelectedItemBackground.SetPixel(0, 0, l_LightGrey);
+            s_SelectedItemBackground.SetPixel(0, 0, l_SelectionColor);
             s_SelectedItemBackground.Apply();
 
             s_ToogleStyle.onNormal.background =
@@ -50,7 +58,9 @@ namespace KeeperHelper.Utils
             s_ToogleStyle.padding = new RectOffset(0, 0, 2, 2);
             s_ToogleStyle.margin = new RectOffset(0, 0, 0, 0);
         }
-        
+        #endregion
+
+        #region EditorWindow
         public void OnGUI()
         {
             if (EditorApplication.isPlaying)
@@ -73,14 +83,15 @@ namespace KeeperHelper.Utils
         {
             DestroyImmediate(s_SelectedItemBackground);
         }
+        #endregion
 
+        #region Draw UI
         private void DrawPlayMode()
         {
             // Clear previous results
             s_interactableButtonHierarchies.Clear();
             s_toggles.Clear();
 
-           
             GetAllInteractableButtons();
 
             // Display Title
@@ -132,7 +143,9 @@ namespace KeeperHelper.Utils
 
             EditorGUILayout.EndVertical();
         }
+        #endregion
 
+        #region Scene utilities
         private void GetAllInteractableButtons()
         {
             var selectables = Selectable.allSelectables;
@@ -159,6 +172,45 @@ namespace KeeperHelper.Utils
             }
         }
 
+        private bool CanBeInteracted(Selectable selectable)
+        {
+            Transform transform = selectable.transform.parent;
+            CanvasGroup canvasGroup = null;
+
+            while (transform != null)
+            {
+                canvasGroup = transform.GetComponent<CanvasGroup>();
+                if (canvasGroup && !canvasGroup.blocksRaycasts)
+                {
+                    return false;
+                }
+
+                transform = transform.parent;
+            }
+
+            return true;
+        }
+
+        private string GetGameObjectPath(Transform transform)
+        {
+            // Clear
+            s_stringBuilder.Remove(0, s_stringBuilder.Length);
+            char delimiter = '/';
+
+            // Get path
+            s_stringBuilder.Append(transform.name);
+            while (transform.parent != null)
+            {
+                transform = transform.parent;
+                s_stringBuilder.Insert(0, delimiter);
+                s_stringBuilder.Insert(0, transform.name);
+            }
+
+            return s_stringBuilder.ToString();
+        }
+        #endregion
+
+        #region Hierarchy utilities
         private bool IsSelectedInHierarchy(Transform transform)
         {
             if (Selection.activeTransform == transform)
@@ -180,51 +232,12 @@ namespace KeeperHelper.Utils
             foreach (Transform t in selectedTransforms)
             {
                 if (t != transform)
-                {
-                    Debug.Log("ADD " + t);
                     tempSelectedTransforms.Add(t);
-                }
             }
             Selection.objects = tempSelectedTransforms.ToArray();
             EditorApplication.RepaintHierarchyWindow();
-
         }
-
-        private bool CanBeInteracted(Selectable selectable)
-        {
-            Transform transform = selectable.transform.parent;
-            CanvasGroup canvasGroup = null;
-
-            while (transform != null)
-            {
-                canvasGroup = transform.GetComponent<CanvasGroup>();
-                if(canvasGroup && !canvasGroup.blocksRaycasts)
-                {
-                    return false;
-                }
-
-                transform = transform.parent;
-            }
-
-            return true;
-        }
-
-        private string GetGameObjectPath(Transform transform)
-        {
-            // Clear
-            s_stringBuilder.Remove(0, s_stringBuilder.Length);
-            char delimiter = '/';
-
-            // Get path
-            s_stringBuilder.Append(transform.name);
-            while(transform.parent != null)
-            {
-                transform = transform.parent;
-                s_stringBuilder.Insert(0, delimiter);
-                s_stringBuilder.Insert(0, transform.name);
-            }
-
-            return s_stringBuilder.ToString();
-        }
+        #endregion
+        #endregion
     }
 }
