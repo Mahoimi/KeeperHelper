@@ -30,7 +30,7 @@ namespace KeeperHelper.Utils
         #endregion
 
         #region Supported Languages
-        // TODO : Set the avalaible language list int a txt file ? Another cvs ?
+        // TODO : Set the avalaible language list in a txt file ? Another cvs ?
         public void GetSupportedLanguages()
         {
             TextAsset[]  l_languagesAssets = Resources.LoadAll<TextAsset>(c_languagesFolderPath);
@@ -98,6 +98,18 @@ namespace KeeperHelper.Utils
             m_currentLanguage = m_supportedLanguages[nextIndex];
             LoadCurrentLanguage();
             RefreshLocalizedTexts();
+        }
+
+        public void SetLanguage(int index)
+        {
+            m_currentLanguage = m_supportedLanguages[index];
+            LoadCurrentLanguage();
+            RefreshLocalizedTexts();
+        }
+
+        public int GetCurrentLanguageIndex()
+        {
+            return m_supportedLanguages.FindIndex(x => x == m_currentLanguage);
         }
 
         #endregion

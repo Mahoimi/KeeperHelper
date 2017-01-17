@@ -1,8 +1,10 @@
 ﻿NewGame;Nouveau;
 LoadGame;Ouvrir;
-SwitchLanguage;Change Langue;
+SwitchLanguage;Changer Langue;
+English;Anglais;
+French;Français;
 QuestSelection;Selection de la Quête;
-VariantSelection; Selection d'une variante;
+VariantSelection;Selection d'une variante;
 Quest_001;Quête 1;
 QHQ_001_1;Quête1-Question1;
 QHA_001_1_A;Réponse1A;

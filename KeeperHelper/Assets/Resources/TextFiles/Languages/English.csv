@@ -1,8 +1,10 @@
 ﻿NewGame;New game;
 LoadGame;Load game;
 SwitchLanguage;Switch Language;
+English;English;
+French;French;
 QuestSelection;Quest Selection;
-VariantSelection; Variant Selection;
+VariantSelection;Variant Selection;
 Quest_001;Quest 1;
 QHQ_001_1;Qest1-Question1;
 QHA_001_1_A;Answer1A;
