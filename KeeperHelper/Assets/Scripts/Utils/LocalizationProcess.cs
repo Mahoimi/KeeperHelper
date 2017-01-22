@@ -11,10 +11,12 @@ namespace KeeperHelper.Utils
         #region Variables
         #region Constant
         private const string c_languagesFolderPath = "TextFiles/Languages";
+        private const string c_languageNamesPath = "TextFiles/LanguageNames";
         private const SystemLanguage c_defaultLanguage = SystemLanguage.English;
         #endregion
 
         public List<SystemLanguage> m_supportedLanguages = new List<SystemLanguage>();
+        public Dictionary<string, string> m_languagesNames = new Dictionary<string, string>();
         public SystemLanguage m_currentLanguage = c_defaultLanguage;
         public Dictionary<string, string> m_localizedString = new Dictionary<string, string>();
         #endregion
@@ -26,6 +28,7 @@ namespace KeeperHelper.Utils
             PrintSupportedLanguages();
             GetSystemLanguage();
             LoadCurrentLanguage();
+            LoadLanguageNames();
         }
         #endregion
 
@@ -79,6 +82,40 @@ namespace KeeperHelper.Utils
 
         #endregion
 
+        #region Languages Names
+        private void LoadLanguageNames()
+        {
+            m_languagesNames.Clear();
+
+            // Read language names csv
+            string[][] data = CSVReader.Read(c_languageNamesPath, ';');
+
+            // Add csv lines (key, value) to the dictionnary
+            for (int i = 0; i < data.Length; i++)
+            {
+                // Get line columns (key, value)     
+                string[] columns = data[i];
+                if (columns.Length < 1)
+                    break;
+
+                // Replace character literals in value string
+                string l_value = CSVReader.ReplaceCharacterLiterals(columns[1]);
+
+                // Add (key, value) 
+                m_languagesNames.Add(columns[0], l_value);
+            }
+        }
+
+        public string GetLanguageName(string key)
+        {
+            string value = "";
+            if (m_languagesNames.TryGetValue(key, out value))
+                return value;
+            return key;
+        }
+        #endregion
+
+
         #region Language selection
         public void GetSystemLanguage()
         { 
@@ -89,15 +126,6 @@ namespace KeeperHelper.Utils
             m_currentLanguage = l_language;
 
             Debug.Log("[Localization] System : " + Application.systemLanguage + " | App : " + m_currentLanguage);
-        }
-
-        public void SwitchLanguage()
-        {
-            int index = m_supportedLanguages.FindIndex(x => x == m_currentLanguage);
-            int nextIndex = (index == m_supportedLanguages.Count - 1) ? 0 : (index + 1);
-            m_currentLanguage = m_supportedLanguages[nextIndex];
-            LoadCurrentLanguage();
-            RefreshLocalizedTexts();
         }
 
         public void SetLanguage(int index)

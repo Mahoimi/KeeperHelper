@@ -38,7 +38,7 @@ namespace KeeperHelper
             m_languageDropdown.ClearOptions();
 
             foreach(SystemLanguage language in MainProcess.Localization.m_supportedLanguages){
-                string l_languageName = MainProcess.Localization.GetLocalizedString(language.ToString());
+                string l_languageName = MainProcess.Localization.GetLanguageName(language.ToString());
                 m_languageDropdown.options.Add(new Dropdown.OptionData() { text = l_languageName });
             }
             m_languageDropdown.value = MainProcess.Localization.GetCurrentLanguageIndex();
@@ -48,11 +48,6 @@ namespace KeeperHelper
         #endregion
 
         #region UI Events
-        public void OnSwitchLanguageClick()
-        {
-            MainProcess.Localization.SwitchLanguage();
-        }
-
         public void OnSelectLanguage(int index)
         {
             MainProcess.Localization.SetLanguage(index);
